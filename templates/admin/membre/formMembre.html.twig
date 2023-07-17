@@ -1,0 +1,74 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{% if editMode %}
+		Modifier un menbre
+	{% else %}
+		Ajouter un menbre
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center my-4">
+		{% if editMode %}
+			Modifier un menbre
+		{% else %}
+			Ajouter un menbre
+		{% endif %}
+	</h1>
+
+
+	{# {{ dump(form) }} #}
+
+	<div
+		class="container">
+		{# <a href="{{ path('app_admin_membre_gestion') }}" class="btn btn-primary">Gestion Menbre</a> #}
+		{{ form_start(form, {
+			attr: {
+				novalidate: 'novalidate'
+			}
+		}) }}
+
+		{{ form_row(form.pseudo , { 
+                attr: {
+                    placeholder: "Ajouter un pseudo"
+                }
+            }) }}
+
+		{% if not editMode %}
+			{{ form_row(form.password) }}
+		{% endif %}
+
+		{{ form_row(form.nom , { 
+                attr: {
+                    placeholder: "Ajouter un nom"
+                }
+            }) }}
+		{{ form_row(form.prenom , { 
+                attr: {
+                    placeholder: "Ajouter un prenom"
+                }
+            }) }}
+		{{ form_row(form.email , { 
+                attr: {
+                    placeholder: "Ajouter un email"
+                }
+            }) }}
+		{{ form_row(form.civilite , { 
+                attr: {
+                    placeholder: "choisir entre homme et femme"
+                }
+            }) }}
+
+		{{ form_row(form.roles , { 
+                attr: {
+                    placeholder: "Ajouter un role"
+                }
+            }) }}
+
+
+		<button class="btn btn-primary" type="submit">envoyer</button>
+
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

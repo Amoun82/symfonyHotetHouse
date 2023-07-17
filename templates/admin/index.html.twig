@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Back Office
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="text-center my-4">Back Office</h1>
+
+	<div class="container">
+		<a href="{{ path('app_admin_membre_gestion') }}" class="btn btn-primary">Gestion Membre</a>
+		<a href="{{ path('app_admin_chambre') }}" class="btn btn-primary">Gestion Chambre</a>
+	</div>
+
+{% endblock %}
