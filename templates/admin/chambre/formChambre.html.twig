@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{% if editMode %}
+		Modifier une chambre
+	{% else %}
+		Ajouter une chambre
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center my-4">
+		{% if editMode %}
+			Modifier une chambre
+		{% else %}
+			Ajouter une chambre
+		{% endif %}
+	</h1>
+
+
+	{# {{ dump(form) }} #}
+
+	<div class="container">
+		<a href="{{ path('app_admin_chambre_gestion') }}" class="btn btn-primary">Gestion Chambre</a>
+		{{ form_start(form, {
+			attr: {
+				novalidate: 'novalidate'
+			}
+		}) }}
+
+		{{ form_row(form.titre , { 
+                attr: {
+                    placeholder: "Ajouter un titre"
+                }
+            }) }}
+
+
+		{{ form_row(form.description_courte , { 
+                attr: {
+                    placeholder: "Ajouter une description courte"
+                }
+            }) }}
+		{{ form_row(form.description_longue , { 
+                attr: {
+                    placeholder: "Ajouter une description longue"
+                }
+            }) }}
+		{{ form_row(form.photo , { 
+                attr: {
+                    placeholder: "Ajouter une photo"
+                }
+            }) }}
+
+		{{ form_row(form.prix_journalier , { 
+                attr: {
+                    placeholder: "Ajouter un prix"
+                }
+            }) }}
+
+
+		<button class="btn btn-primary" type="submit">envoyer</button>
+
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

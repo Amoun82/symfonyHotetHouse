@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MembreController!{% endblock %}
+{% block title %}Gestion Membre{% endblock %}
 
 {% block body %}
 <h1 class="text-center my-4">Gestion des Membres</h1>
@@ -35,7 +35,7 @@
 						<td>{{ membre.roles|join(", ") }}</td>
 						<td>
 							<a href="{{ path('app_admin_membre_update' , {id: membre.id}) }}" class="text-warning">modifier</a>
-							{# <a href="{{ path('app_admin_membre_delete', {id: membre.id}) }}" class="text-danger">supprimer</a> #}
+							<a href="{{ path('app_admin_membre_delete', {id: membre.id}) }}" class="text-danger">supprimer</a>
 						</td>
 					</tr>
 				{% endfor %}

@@ -1,20 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ChambreController!{% endblock %}
+{% block title %}gestion Chambre{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h1 class="text-center my-4">Gestion des Chambres</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/hotelhouse/src/Controller/Admin/ChambreController.php'|file_link(0) }}">src/Controller/Admin/ChambreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/hotelhouse/templates/admin/chambre/index.html.twig'|file_link(0) }}">templates/admin/chambre/index.html.twig</a></code></li>
-    </ul>
-</div>
+	<div class="container">
+		<a href="{{ path('app_admin_chambre_new') }}" class="btn btn-primary my-2">Ajouter une chambre</a>
+		<table class="table table-dark">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Titre</th>
+					<th>Description courte</th>
+					<th>Description longue</th>
+					<th>Photo</th>
+					<th>Prix journalier</th>
+					<th>Date Enregistrement</th>
+					<th>option</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for chambre in chambres %}
+					<tr>
+						<td>{{ chambre.id }}</td>
+						<td>{{ chambre.titre }}</td>
+						<td>{{ chambre.descriptionCourte }}</td>
+						<td>{{ chambre.descriptionLongue|slice(0,10) }}...</td>
+						<td>
+							<img src="{{ asset(img_dir ~ chambre.photo) }}" alt="{{ chambre.photo }}" style="max-height: 100px;">
+						</td>
+						<td>{{ chambre.prixJournalier }}</td>
+						<td>{{ chambre.dateEnregistrement|date("d/m/Y à H:i/s") }}</td>
+						<td>
+							<a href="{{ path('app_admin_chambre_update' , {id: chambre.id}) }}" class="text-warning">modifier</a>
+							<a href="{{ path('app_admin_chambre_delete', {id: chambre.id}) }}" class="text-danger">supprimer</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}

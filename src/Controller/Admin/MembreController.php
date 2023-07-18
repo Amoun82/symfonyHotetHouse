@@ -12,23 +12,26 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface as Hasher;
 
+#[Route('/admin')]
 class MembreController extends AbstractController
 {
-    #[Route('/admin/membre', name: 'app_admin_membre')]
+    #[Route('/membre', name: 'app_admin_membre')]
     public function index(): Response
     {
         return $this->render('admin/index.html.twig');
     }
 
-    #[Route('/admin/membre/modifier/{id}', name: "app_admin_membre_update")]
-    #[Route('/admin/membre/ajouter', name: 'app_admin_membre_new')]
+    #[Route('/membre/modifier/{id}', name: "app_admin_membre_update")]
+    #[Route('/membre/ajouter', name: 'app_admin_membre_new')]
     public function formMembre(Request $request, EntityManagerInterface $manager, Membre $membre = null, Hasher $hasher)
     {
         if ($membre == null) {
             $membre = new Membre;
             $form = $this->createForm(MembreType::class, $membre);
+            $this->addFlash('success', 'un membre a été ajouté');
         } else {
             $form = $this->createForm(MembreType::class, $membre, ['is_edit' => true]);
+            $this->addFlash('success', 'un membre a été modifié');
         }
 
 
@@ -46,7 +49,8 @@ class MembreController extends AbstractController
             $membre->setDateEnregistrement(new \DateTime);
             $manager->persist($membre);
             $manager->flush();
-            return $this->redirectToRoute('app_admin_membre');
+            
+            return $this->redirectToRoute('app_admin_membre_gestion');
         }
 
         return $this->render('admin/membre/formMembre.html.twig', [
@@ -55,12 +59,22 @@ class MembreController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/membre/gestion', name: 'app_admin_membre_gestion')]
+    #[Route('/membre/gestion', name: 'app_admin_membre_gestion')]
     public function gestionVehicule(MembreRepository $membre): Response
     {
         $membres = $membre->findAll();
         return $this->render('admin/membre/index.html.twig', [
             'membres' => $membres,
         ]);
+    }
+
+    #[Route('/membre/supprimer/{id}', name: 'app_admin_membre_delete')]
+    public function delete(EntityManagerInterface $manager, Membre $membre): Response
+    {
+        $manager->remove($membre);
+        $manager->flush();
+        $this->addFlash('danger', 'un membre a été supprimé');
+
+        return $this->redirectToRoute('app_admin_membre_gestion', [], Response::HTTP_SEE_OTHER);
     }
 }
