@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{% if editMode %}
+		Modifier un slider
+	{% else %}
+		Ajouter un slider
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center my-4">
+		{% if editMode %}
+			Modifier un slider
+		{% else %}
+			Ajouter un slider
+		{% endif %}
+	</h1>
+
+
+	{# {{ dump(form) }} #}
+
+	<div class="container">
+		<a href="{{ path('app_admin_slider_gestion') }}" class="btn btn-primary">Gestion Slider</a>
+		{{ form_start(form, {
+			attr: {
+				novalidate: 'novalidate'
+			}
+		}) }}
+
+		{{ form_row(form.ordre , { 
+                attr: {
+                    placeholder: "Ajouter un titre"
+                }
+            }) }}
+
+		{{ form_row(form.photo , { 
+                attr: {
+                    placeholder: "Ajouter une photo"
+                }
+            }) }}
+
+		<button class="btn btn-primary" type="submit">envoyer</button>
+
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

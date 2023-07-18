@@ -25,13 +25,13 @@ class MembreController extends AbstractController
     #[Route('/membre/ajouter', name: 'app_admin_membre_new')]
     public function formMembre(Request $request, EntityManagerInterface $manager, Membre $membre = null, Hasher $hasher)
     {
+        $test = false ;
         if ($membre == null) {
             $membre = new Membre;
             $form = $this->createForm(MembreType::class, $membre);
-            $this->addFlash('success', 'un membre a été ajouté');
+            $test = true ;
         } else {
             $form = $this->createForm(MembreType::class, $membre, ['is_edit' => true]);
-            $this->addFlash('success', 'un membre a été modifié');
         }
 
 
@@ -49,7 +49,12 @@ class MembreController extends AbstractController
             $membre->setDateEnregistrement(new \DateTime);
             $manager->persist($membre);
             $manager->flush();
-            
+            if($test == false)
+            {
+                $this->addFlash('success', 'un membre a été modifié');
+            }else {
+                $this->addFlash('success', 'un membre a été ajouté');
+            }
             return $this->redirectToRoute('app_admin_membre_gestion');
         }
 

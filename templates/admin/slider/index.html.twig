@@ -1,20 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SliderController!{% endblock %}
+{% block title %}Gestion Slider
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	{# {{ dump(sliders) }} #}
+    
+    <h1 class="text-center my-4">Gestion du Slider</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<div class="container">
+		<a href="{{ path('app_admin_slider_new') }}" class="btn btn-primary my-2">Ajouter un slider</a>
+		{% if sliders is empty %}
+			<div>
+				<p>
+					il n'y a pas de une photo
+				</p>
+			</div>
+		{% else %}
+			<table class="table table-dark">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Photo</th>
+						<th>Ordre</th>
+						<th>Date Enregistrement</th>
+						<th>option</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for slider in sliders %}
+						<tr>
+							<td>{{ slider.id }}</td>
+							<td>{{ slider.ordre }}</td>
+							<td>
+								<figure>
+									<img src="{{ asset(img_dir ~ slider.photo) }}" alt="{{ slider.photo }}" style="max-height: 100px;">
+									<figcaption>
+										{{ slider.photo }}
+									</figcaption>
+								</figure>
+							</td>
+							<td>{{ slider.dateEnregistrement|date("d/m/Y à H:i/s") }}</td>
+							<td>
+								<a href="{{ path('app_admin_slider_update' , {id: slider.id}) }}" class="text-warning">modifier</a>
+								<a href="{{ path('app_admin_slider_delete', {id: slider.id}) }}" class="text-danger">supprimer</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/hotelhouse/src/Controller/Admin/SliderController.php'|file_link(0) }}">src/Controller/Admin/SliderController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/hotelhouse/templates/admin/slider/index.html.twig'|file_link(0) }}">templates/admin/slider/index.html.twig</a></code></li>
-    </ul>
-</div>
+		{% endif %}
+
+	</div>
 {% endblock %}

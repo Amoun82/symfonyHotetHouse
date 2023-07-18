@@ -35,12 +35,11 @@ class ChambreController extends AbstractController
     #[Route('/chambre/ajouter', name: ('app_admin_chambre_new'))]
     public function formChambre(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger, Chambre $chambre = null): Response
     {
+        $test = false ;
         if ($chambre == null) {
             $chambre = new Chambre;
             $chambre->setDateEnregistrement(new \DateTime);
-            $this->addFlash('success', 'une chambre a été ajoutée');
-        }else {
-            $this->addFlash('success', 'la chambre a été modifiée');
+            $test = true ;
         }
 
         $form = $this->createForm(ChambreType::class, $chambre);
@@ -68,6 +67,13 @@ class ChambreController extends AbstractController
                 }
                 $chambre->setPhoto($newFilename);
             }
+
+            if($test == false)
+            {
+                $this->addFlash('success', 'la chambre a été modifiée');
+            }else {
+                $this->addFlash('success', 'une chambre a été ajoutée');
+            }
             $manager->persist($chambre);
             $manager->flush();
 
@@ -84,7 +90,7 @@ class ChambreController extends AbstractController
     {
         $manager->remove($chambre);
         $manager->flush();
-        $this->addFlash('danger', 'une chmabre a été supprimé');
+        $this->addFlash('danger', 'une chambre a été supprimé');
 
         return $this->redirectToRoute('app_admin_chambre_gestion', [], Response::HTTP_SEE_OTHER);
     }
