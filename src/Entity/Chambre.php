@@ -17,18 +17,23 @@ class Chambre
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(min: 5, max: 255, minMessage: "pas assez de caratcères. Il faut au moins {{ limit }} caractères et {{ value }} est trop court")]
+    #[Assert\NotBlank(message:'Ce champs ne peux pas être vide')]
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
+    #[Assert\NotBlank(message:'Ce champs ne peux pas être vide')]
     #[ORM\Column(length: 255)]
     private ?string $description_courte = null;
 
+    #[Assert\NotBlank(message:'Ce champs ne peux pas être vide')]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description_longue = null;
 
     #[ORM\Column(length: 255)]
     private ?string $photo = null;
 
+    #[Assert\NotBlank(message:'Ce champs ne peux pas être vide')]
     #[ORM\Column]
     private ?float $prix_journalier = null;
 
