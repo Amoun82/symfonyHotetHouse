@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Chambres
+{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center my-2">Les chambres</h1>
+
+	{% for chambre in chambres %}
+		<div class="card rounded mb-3">
+			<div class="row g-0">
+				<div class="col-md-6 d-flex align-items-center">
+					<img src="{{ asset(img_dir ~ chambre.photo) }}" class="img-fluid rounded-start" alt="{{ chambre.photo }}">
+				</div>
+				<div class="col-md-6 d-flex align-items-center">
+					<div class="card-body">
+						<h5 class="card-title">{{ chambre.titre }}</h5>
+						<p class="card-text">{{ chambre.descriptionCourte }}</p>
+						<p class="card-text">la journée :
+							<small class="text-body-secondary">{{ chambre.prixJournalier }}€</small>
+						</p>
+						<a href="{{ path('app_home_bedroom_show', {id: chambre.id}) }}" class="text-decoration-none">détail de La Chambre</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

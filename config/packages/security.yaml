@@ -42,6 +42,7 @@ security:
         
     access_denied_url: /
 
+
 when@test:
     security:
         password_hashers:

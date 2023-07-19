@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CommandeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,9 +15,13 @@ class Commande
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\GreaterThanOrEqual(value: "today", message: "Veuillez sélectionner des dates posterieur à la date d'aujourd'hui")]
+    #[Assert\LessThanOrEqual(propertyPath: "date_depart", message: "Le début de la location doit se faire avant sa fin")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_arrivee = null;
-
+    
+    #[Assert\GreaterThanOrEqual(value: "today", message: "Veuillez sélectionner des dates posterieur à la date d'aujourd'hui")]
+    #[Assert\GreaterThanOrEqual(propertyPath: "date_arrivee", message: "La fin de la location doit se faire avant son début")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_depart = null;
 

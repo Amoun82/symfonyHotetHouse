@@ -4,6 +4,7 @@ twig:
 
     globals:
         img_dir: 'assets/uploads/'
+        img_site: 'assets/img/'
 
 when@test:
     twig:

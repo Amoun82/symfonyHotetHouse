@@ -154,4 +154,9 @@ class Chambre
 
         return $this;
     }
+
+    public function getTitrePrix(): string
+    {
+        return $this->getTitre() ." prix à la journée : ". $this->getPrixJournalier()."€" ;
+    }
 }

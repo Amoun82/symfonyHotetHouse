@@ -12,7 +12,7 @@
 		<body>
 			<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="#">Navbar</a>
+					<a class="navbar-brand" href="{{ path('app_home') }}"><img src="{{ asset(img_site ~ 'Hotel_Logo.png') }}" alt="Hotel Logo" style="height: 100px;"></a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
@@ -28,6 +28,18 @@
 									<a class="nav-link" href="{{ path('app_admin_membre') }}">Back Office</a>
 								</li>
 							{% endif %}
+
+							<li class="nav-item">
+								<a class="nav-link active" href="{{ path('app_commande_new') }}">Reservation
+									<span class="visually-hidden">(current)</span>
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link active" href="{{ path('app_chambre') }}">Chambres
+									<span class="visually-hidden">(current)</span>
+								</a>
+							</li>
 							
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>

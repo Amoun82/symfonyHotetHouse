@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{% if editMode %}
+		Modifier une commande
+	{% else %}
+		Ajouter une commande
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center my-4">
+		{% if editMode %}
+			Modifier une commande
+		{% else %}
+			Ajouter une commande
+		{% endif %}
+	</h1>
+
+
+	{# {{ dump(form) }} #}
+
+	<div class="container">
+		{{ form_start(form, {
+			attr: {
+				novalidate: 'novalidate'
+			}
+		}) }}
+
+
+		{{ form_row(form.date_arrivee , { 
+                attr: {
+                    placeholder: "Ajouter une description courte"
+                }
+            }) }}
+		{{ form_row(form.date_depart , { 
+                attr: {
+                    placeholder: "Ajouter une description longue"
+                }
+            }) }}
+		{{ form_row(form.prix_total , { 
+                attr: {
+                    placeholder: "Ajouter une photo"
+                }
+            }) }}
+
+		{{ form_row(form.nom , { 
+                attr: {
+                    placeholder: "Ajouter un prix"
+                }
+            }) }}
+
+		{{ form_row(form.prenom , { 
+                attr: {
+                    placeholder: "Ajouter un prix"
+                }
+            }) }}
+
+		{{ form_row(form.telephone , { 
+                attr: {
+                    placeholder: "Ajouter un prix"
+                }
+            }) }}
+
+		{{ form_row(form.email , { 
+                attr: {
+                    placeholder: "Ajouter un prix"
+                }
+            }) }}
+
+		{{ form_row(form.id_chambre) }}
+
+		<button class="btn btn-primary" type="submit">envoyer</button>
+
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

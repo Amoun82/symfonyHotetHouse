@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chambre
+{% endblock %}
+
+{% block body %}
+	{# {{ dump(chambre) }} #}
+	<div class="card mb-3">
+		<img src="{{ asset(img_dir ~ chambre.photo) }}" class="card-img-top" alt="{{ chambre.photo }}">
+		<div class="card-body">
+			<h5 class="card-title">{{ chambre.titre }}</h5>
+			<p class="card-text">{{ chambre.descriptionLongue }}</p>
+			<p class="card-text">la journée :
+				<small class="text-body-secondary">{{ chambre.prixJournalier }}€</small>
+			</p>
+		</div>
+	</div>
+
+	<div class="container">
+		{{ form_start(form, {
+			attr: {
+				novalidate: 'novalidate'
+			}
+		}) }}
+
+
+		{{ form_row(form.date_arrivee) }}
+		{{ form_row(form.date_depart) }}
+
+
+		{# {{ form_row(form.prix_total) }} #}
+
+		{{ form_row(form.nom , { 
+                attr: {
+                    placeholder: "Ajouter votre nom"
+                }
+            }) }}
+
+		{{ form_row(form.prenom , { 
+                attr: {
+                    placeholder: "Ajouter un prénom"
+                }
+            }) }}
+
+		{{ form_row(form.telephone , { 
+                attr: {
+                    placeholder: "Ajouter votre téléphone"
+                }
+            }) }}
+
+		{{ form_row(form.email , { 
+                attr: {
+                    placeholder: "Ajouter un email"
+                }
+            }) }}
+
+		<button class="btn btn-primary" type="submit">envoyer</button>
+
+		{{ form_end(form) }}
+	</div>
+{% endblock %}
