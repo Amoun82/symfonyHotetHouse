@@ -32,6 +32,17 @@ class CommandeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // dd($commande,$commande->getIdChambre()->getCommandes()->getValues());
+            // dd($commande->getIdChambre()->getCommandes()->getValues());
+
+            foreach ($commande->getIdChambre()->getCommandes()->getValues() as $chambreDate) {
+                if($commande->getDateArrivee() < $chambreDate->getDateDepart() && $commande->getDateDepart() > $chambreDate->getDateArrivee() )
+                {
+                    $this->addFlash('danger', 'la chambre est déjà réservé');
+
+                    return $this->redirectToRoute('app_commande_new');
+                }
+            }
+
             $interval = $commande->getDateArrivee()->diff($commande->getDateDepart()) ;
             $prix = $commande->getIdChambre()->getPrixJournalier() * ($interval->days + 1);
             $commande->setDateEnregistrement(new \DateTime);

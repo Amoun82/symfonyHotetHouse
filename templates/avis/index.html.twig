@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les Avis{% endblock %}
+{% block title %}Les Avis
+{% endblock %}
 
 {% block body %}
 
@@ -11,8 +12,9 @@
 			{# {{ dump(avi) }} #}
 			<div class="card mb-3">
 				<div class="row g-0">
-					<div class="col-md-4 d-flex align-items-center justify-content-center">
-						<img src="{% if avi.categorie == 'chambre' %} {{ asset(img_site ~ 'chambre.jpg') }} {% elseif avi.categorie == 'restaurant' %} {{ asset(img_site ~ 'restaurant.jpg') }} {% elseif avi.categorie == 'soins' %} {{ asset(img_site ~ 'soin.jpg') }} {% endif %}" class="img-fluid rounded-start" alt="{% if avi.categorie == 'chambre' %} {{ 'chambre.jpg' }} {% elseif avi.categorie == 'restaurant' %} {{ 'restaurant.jpg' }} {% elseif avi.categorie == 'soins' %} {{ 'soin.jpg' }} {% endif %}">
+					<div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
+						<h5 class="card-title">{% if avi.categorie == 'chambre' %} {{ 'Chambre' }} {% elseif avi.categorie == 'restaurant' %} {{ 'Restaurant' }} {% elseif avi.categorie == 'spa' %} {{ 'Soin' }} {% endif %}</h5>
+						<img src="{% if avi.categorie == 'chambre' %} {{ asset(img_site ~ 'chambre.jpg') }} {% elseif avi.categorie == 'restaurant' %} {{ asset(img_site ~ 'restaurant.jpg') }} {% elseif avi.categorie == 'spa' %} {{ asset(img_site ~ 'soin.jpg') }} {% endif %}" class="img-fluid rounded-start" alt="{% if avi.categorie == 'chambre' %} {{ 'chambre.jpg' }} {% elseif avi.categorie == 'restaurant' %} {{ 'restaurant.jpg' }} {% elseif avi.categorie == 'spa' %} {{ 'soin.jpg' }} {% endif %}">
 					</div>
 					<div class="col-md-8 d-flex align-items-center">
 						<div class="card-body">

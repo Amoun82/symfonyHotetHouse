@@ -40,10 +40,4 @@ class AvisController extends AbstractController
         ]);
     }
 
-    #[Route('/avis/ajouter', name: 'app_avis_new')]
-    public function formCommande(Request $request, EntityManagerInterface $manager)
-    {
-
-        
-    }
 }
