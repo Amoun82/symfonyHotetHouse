@@ -15,7 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface as Hashe
 #[Route('/admin')]
 class MembreController extends AbstractController
 {
-    #[Route('/gestion', name: 'app_admin_membre')]
+    #[Route('/gestion', name: 'app_admin_gestion')]
     public function index(): Response
     {
         return $this->render('admin/index.html.twig');

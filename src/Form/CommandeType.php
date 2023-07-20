@@ -32,7 +32,6 @@ class CommandeType extends AbstractType
             //->add('date_enregistrement')
         if(!$options['is_chambre'])
         {
-
             $builder
                 ->add('id_chambre', EntityType::class, [
                     'class' => Chambre::class,

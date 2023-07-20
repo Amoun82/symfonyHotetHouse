@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Avis{% endblock %}
+
+{% block body %}
+
+	<section>
+		<h1 class="text-center mt-5 mb-2">Les avis</h1>
+
+		{% for avi in avis %}
+			{# {{ dump(avi) }} #}
+			<div class="card mb-3">
+				<div class="row g-0">
+					<div class="col-md-4 d-flex align-items-center justify-content-center">
+						<img src="{% if avi.categorie == 'chambre' %} {{ asset(img_site ~ 'chambre.jpg') }} {% elseif avi.categorie == 'restaurant' %} {{ asset(img_site ~ 'restaurant.jpg') }} {% elseif avi.categorie == 'soins' %} {{ asset(img_site ~ 'soin.jpg') }} {% endif %}" class="img-fluid rounded-start" alt="{% if avi.categorie == 'chambre' %} {{ 'chambre.jpg' }} {% elseif avi.categorie == 'restaurant' %} {{ 'restaurant.jpg' }} {% elseif avi.categorie == 'soins' %} {{ 'soin.jpg' }} {% endif %}">
+					</div>
+					<div class="col-md-8 d-flex align-items-center">
+						<div class="card-body">
+							<h5 class="card-title bg-dark text-white p-3">{{ avi.pseudo }}</h5>
+							<p class="card-text my-5">{{ avi.contenu|e('html')|capitalize }}</p>
+							<p class="card-text">
+								<small class="bg-dark text-white p-3">{{avi.dateEnregistrement|date("d/m/Y à H:i/s")}}</small>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		{% endfor %}
+	</section>
+
+	<section>
+
+		<h1 class="text-center mt-5 mb-2">Ajouter vos avis</h1>
+		<div class="container">
+			{{ form_start(form, {
+			attr: {
+				novalidate: 'novalidate'
+			}
+			}) }}
+
+			{{ form_row(form.pseudo, {
+				'label': 'Nom Prenom ou pseudo',
+				attr: {
+                    placeholder: "Ajouter un nom et prenom ou un pseudo"
+                }
+			}) }}
+
+			{{ form_row(form.contenu, {
+				'label': 'Vos avis',
+				attr:{
+					placeholder: "Ajouter vos avis"
+				}
+			}) }}
+
+			{{ form_row(form.categorie, {
+				'label': 'Categorie'
+			}) }}
+
+			<button class="btn btn-primary" type="submit">envoyer</button>
+
+			{{ form_end(form) }}
+		</div>
+	</section>
+
+{% endblock %}

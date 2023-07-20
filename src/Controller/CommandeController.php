@@ -31,6 +31,7 @@ class CommandeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // dd($commande,$commande->getIdChambre()->getCommandes()->getValues());
             $interval = $commande->getDateArrivee()->diff($commande->getDateDepart()) ;
             $prix = $commande->getIdChambre()->getPrixJournalier() * ($interval->days + 1);
             $commande->setDateEnregistrement(new \DateTime);
