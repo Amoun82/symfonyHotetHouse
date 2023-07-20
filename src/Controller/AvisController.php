@@ -14,17 +14,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AvisController extends AbstractController
 {
     #[Route('/avis', name: 'app_avis')]
-    public function index(AvisRepository $ar, Request $request, EntityManagerInterface $manager): Response
+    public function index(AvisRepository $ar, Request $request, EntityManagerInterface $manager, Avis $avis = null): Response
     {
-        $ar->findAll();
-
-        $avis = new Avis;
+        $avisGet = $ar->findAll();
+        // dd($ar->findAll()) ;
+        // dd($ar->findBy(['categorie' => 'chambre'])) ;
+        $avisGet = $ar->findBy(['categorie' => 'chambre']);
+        if($avis == null)
+        {
+            $avis = new Avis;
+        }
 
         $form = $this->createForm(AvisType::class, $avis);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // dd($request) ;
             $avis->setDateEnregistrement(new \DateTime);
             $manager->persist($avis);
             $manager->flush();
@@ -36,7 +42,7 @@ class AvisController extends AbstractController
 
         return $this->render('avis/index.html.twig', [
             'form' => $form,
-            'avis' => $ar->findAll(),
+            'avis' => $avisGet,
         ]);
     }
 

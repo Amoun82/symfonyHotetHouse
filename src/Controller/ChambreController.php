@@ -39,7 +39,7 @@ class ChambreController extends AbstractController
                 {
                     $this->addFlash('danger', 'la chambre est déjà réservé');
 
-                    return $this->redirectToRoute('app_commande_new');
+                    return $this->redirectToRoute('app_home_bedroom_show', ['id' => $id]);
                 }
             }
             $interval = $commande->getDateArrivee()->diff($commande->getDateDepart()) ;
