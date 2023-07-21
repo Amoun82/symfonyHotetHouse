@@ -33,10 +33,6 @@ class Chambre
     #[ORM\Column(length: 255)]
     private ?string $photo = null;
 
-    #[Assert\Type(
-        type: 'integer',
-        message: 'la valeur {{ value }} n\'est pas un nombre.',
-    )]
     #[Assert\Positive(message: 'le nombre doit être positif')]
     #[Assert\NotBlank(message:'Ce champs ne peux pas être vide')]
     #[ORM\Column]
