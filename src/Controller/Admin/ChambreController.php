@@ -38,7 +38,6 @@ class ChambreController extends AbstractController
         $test = false ;
         if ($chambre == null) {
             $chambre = new Chambre;
-            $chambre->setDateEnregistrement(new \DateTime);
             $test = true ;
         }
 
@@ -47,6 +46,7 @@ class ChambreController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $chambre->setDateEnregistrement(new \DateTime);
             $existingFilename = $chambre->getPhoto();
 
             if ($form->get('photo')->getData()) {
@@ -79,7 +79,9 @@ class ChambreController extends AbstractController
 
             return $this->redirectToRoute('app_admin_chambre_gestion');
         }
-        return $this->render('admin/Chambre/formChambre.html.twig', [
+
+
+        return $this->render('admin/chambre/formChambre.html.twig', [
             'form' => $form,
             'editMode' => $chambre->getId() != null
         ]);
