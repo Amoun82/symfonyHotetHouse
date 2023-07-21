@@ -16,10 +16,31 @@ class AvisController extends AbstractController
     #[Route('/avis', name: 'app_avis')]
     public function index(AvisRepository $ar, Request $request, EntityManagerInterface $manager, Avis $avis = null): Response
     {
-        $avisGet = $ar->findAll();
+        //dd($request->request->get('categorie'));
+
+        $choixAvis = $request->request->get('categorie');
+
+        $avisGet = null ;
+
+        switch ($choixAvis) {
+            case 'chambre':
+                $avisGet = $ar->findBy(['categorie' => 'chambre']);
+                break;
+            case 'restaurant':
+                $avisGet = $ar->findBy(['categorie' => 'restaurant']);
+                break;
+            case 'spa':
+                $avisGet = $ar->findBy(['categorie' => 'spa']);
+                break;
+            
+            default:
+                $avisGet = $ar->findAll();
+                break;
+        }
+        
         // dd($ar->findAll()) ;
         // dd($ar->findBy(['categorie' => 'chambre'])) ;
-        $avisGet = $ar->findBy(['categorie' => 'chambre']);
+        
         if($avis == null)
         {
             $avis = new Avis;

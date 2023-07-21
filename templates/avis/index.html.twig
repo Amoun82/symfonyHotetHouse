@@ -8,12 +8,33 @@
 	<section>
 		<h1 class="text-center mt-5 mb-2">Les avis</h1>
 
+			<form method="post" class="d-flex flex-column align-items-center my-2">	
+				<label for="categorie">choisir la catégorie des avis</label>
+
+				<select class="my-2" name="categorie">
+					<option value="">Faites votre choix</option>
+					<option value="chambre">Chambre</option>
+					<option value="spa">Soin</option>
+					<option value="restaurant">Restaurant</option>
+				</select>
+
+				<button class="btn btn-primary btn-sm" type="submit">chercher</button>
+			</form>
+
 		{% for avi in avis %}
 			{# {{ dump(avi) }} #}
 			<div class="card mb-3">
 				<div class="row g-0">
 					<div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
-						<h5 class="card-title">{% if avi.categorie == 'chambre' %} {{ 'Chambre' }} {% elseif avi.categorie == 'restaurant' %} {{ 'Restaurant' }} {% elseif avi.categorie == 'spa' %} {{ 'Soin' }} {% endif %}</h5>
+						<h5 class="card-title">
+							{% if avi.categorie == 'chambre' %}
+								{{ 'Chambre' }}
+							{% elseif avi.categorie == 'restaurant' %}
+								{{ 'Restaurant' }}
+							{% elseif avi.categorie == 'spa' %}
+								{{ 'Soin' }}
+							{% endif %}
+						</h5>
 						<img src="{% if avi.categorie == 'chambre' %} {{ asset(img_site ~ 'chambre.jpg') }} {% elseif avi.categorie == 'restaurant' %} {{ asset(img_site ~ 'restaurant.jpg') }} {% elseif avi.categorie == 'spa' %} {{ asset(img_site ~ 'soin.jpg') }} {% endif %}" class="img-fluid rounded-start" alt="{% if avi.categorie == 'chambre' %} {{ 'chambre.jpg' }} {% elseif avi.categorie == 'restaurant' %} {{ 'restaurant.jpg' }} {% elseif avi.categorie == 'spa' %} {{ 'soin.jpg' }} {% endif %}">
 					</div>
 					<div class="col-md-8 d-flex align-items-center">
